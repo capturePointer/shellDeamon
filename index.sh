@@ -2,7 +2,10 @@
 LogFilePath="/dev/null"
 AppName=(
     #"/root/python demo.py"
-    "/usr/local/bin/python /home/es_sync_mongo.py"
+    "mongod -f /mongo/configer/config/mongo.conf"
+    "mongod -f /mongo/shard1/config/mongo.conf"
+    "mongod -f /mongo/shard2/config/mongo.conf"
+    "mongod -f /mongo/shard3/config/mongo.conf"
 )
 
 Num=${#AppName[*]}
@@ -12,6 +15,7 @@ while [ $i -lt $Num ]; do
     pos=`expr index "$Process" '/'`
     pos=`expr $pos - 1`
     ProcessName=${Process:$pos}
+	echo "--------------check process: $ProcessName --------------------"
     PROCESS_NUM=`ps -ef|grep "$ProcessName"|grep -v "grep"|wc -l`
     #if [ $PROCESS_NUM -lt 1 ] && [ $1 = '-r' ]; then
     if [ $PROCESS_NUM -lt 1 ]; then
@@ -40,5 +44,8 @@ while [ $i -lt $Num ]; do
         ####echo "------------Kill $ProcName-----------"
         ####killall $ProcName
 		#########################################################
+    elif [ $PROCESS_NUM -eq 1 ]; then
+		echo "----------------- $ProcessName is ok ------------------------------"
     fi
+	i=`expr $i + 1`
 done
