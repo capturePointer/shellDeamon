@@ -2,10 +2,10 @@
 LogFilePath="/dev/null"
 AppName=(
     #"/root/python demo.py"
-    "mongod -f /mongo/configer/config/mongo.conf"
-    "mongod -f /mongo/shard1/config/mongo.conf"
-    "mongod -f /mongo/shard2/config/mongo.conf"
-    "mongod -f /mongo/shard3/config/mongo.conf"
+    "python3 /home/missing/1000/server/index.py"
+    "python3 /home/missing/1000/client1/index.py"
+    "python3 /home/missing/1000/client2/index.py"
+    "python3 /home/missing/1000/client3/index.py"
 )
 
 Num=${#AppName[*]}
